@@ -110,7 +110,7 @@ RSpec.describe Zoo do
     expect(@zoo.animals_sorted_by_weight).to eq([@animal_4, @animal_3, @animal_1, @animal_2])
   end
 
-  it '' do
+  it 'can group animals by first letter in name' do
     @zoo.add_animal(@animal_1)
     @zoo.add_animal(@animal_2)
     @zoo.add_animal(@animal_3)
