@@ -9,6 +9,7 @@ RSpec.describe Zoo do
     @animal_2 = Animal.new("Red Panda", 5, 70)
     @animal_3 = Animal.new("Capybara", 100, 150)
     @animal_4 = Animal.new("Dolphin", 150, 200)
+    @animal_5 = Animal.new("Dog", 65, 200)
   end
   it 'exists' do
     expect(@zoo).to be_an_instance_of(Zoo)
@@ -88,4 +89,90 @@ RSpec.describe Zoo do
 
     expect(@zoo.total_weight_of_animals).to eq(265)
   end
+
+  # pry(main)> zoo.details
+  # #=> {"total_weight" => 265, "street_address" => "2300 Southern Blvd"}
+  it 'has details' do
+    @zoo.add_animal(@animal_1)
+    @zoo.add_animal(@animal_2)
+    @zoo.add_animal(@animal_3)
+    @zoo.add_animal(@animal_4)
+
+    expect(@zoo.details).to eq({"total_weight" => 265, "street_address" => "2300 Southern Blvd"})
+  end
+
+  # iteration 4
+
+  it 'can sort animals by weight' do
+    @zoo.add_animal(@animal_1)
+    @zoo.add_animal(@animal_2)
+    @zoo.add_animal(@animal_3)
+    @zoo.add_animal(@animal_4)
+
+    expect(@zoo.animals_sorted_by_weight).to eq([@animal_4, @animal_3, @animal_1, @animal_2])
+  end
+
+  it '' do
+    @zoo.add_animal(@animal_1)
+    @zoo.add_animal(@animal_2)
+    @zoo.add_animal(@animal_3)
+    @zoo.add_animal(@animal_4)
+    @zoo.add_animal(@animal_5)
+
+    expect(@zoo.hash).to eq({
+    "C" => [@animal_3],
+    "D" => [@animal_5, @animal_4],
+    "R" => [@animal_2],
+    "S" => [@animal_1]
+    })
+  end
+
 end
+
+# ```ruby
+# pry(main)> require './lib/animal'
+# #=> true
+#
+# pry(main)> require './lib/zoo'
+# #=> true
+#
+# pry(main)> zoo = Zoo.new("Bronx Zoo", "2300 Southern Blvd", "Bronx", "NY", "10460")
+# #=> #<Zoo:0x00007fccd30375f8...>
+#
+# pry(main)> animal_1 = Animal.new("Sea Otter", 10, 25)
+# #=> #<Animal:0x00007fccd29b5720...>
+#
+# pry(main)> animal_2 = Animal.new("Red Panda", 5, 70)
+# #=> #<Animal:0x00007fccd2985f48...>
+#
+# pry(main)> animal_3 = Animal.new("Capybara", 100, 150)
+# #=> #<Animal:0x00007fccd383c2d0...>
+#
+# pry(main)> animal_4 = Animal.new("Dolphin", 150, 200)
+# #=> #<Animal:0x00007fccd297dc30...>
+#
+# pry(main)> zoo.add_animal(animal_1)
+#
+# pry(main)> zoo.add_animal(animal_2)
+#
+# pry(main)> zoo.add_animal(animal_3)
+#
+# pry(main)> zoo.add_animal(animal_4)
+#
+# zoo.animals_sorted_by_weight
+# #=> [#<Animal:0x00007fccd297dc30...>,#<Animal:0x00007fccd383c2d0...>,#<Animal:0x00007fccd2985f48...,#<Animal:0x00007fccd29b5720...>]
+#
+# pry(main)> animal_5 = Animal.new("Dog", 65, 200)
+# #=> #<Animal:0x00007fccd297dc30...>
+#
+# pry(main)> zoo.add_animal(animal_5)
+# #=> #<Animal:0x00007f23d297dc30...>
+#
+# pry(main)> zoo.animal_hash
+# #=> {
+# "C" => [#<Animal:0x00007fccd383c2d0...>],
+# "D" => [#<Animal:0x00007f23d297dc30...>, #<Animal:0x00007fccd297dc30...>],
+# "R" => [#<Animal:0x00007fccd2985f48...>],
+# "S" => [#<Animal:0x00007fccd29b5720...>]
+# }
+# ```
